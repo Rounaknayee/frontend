@@ -1,20 +1,22 @@
 import React from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import {rooturl} from "../config.js";
 
 // API_NAME
-const api_name = "https://api.server.test/register";
+const register_api = rooturl+"api/user/register";
 
 function validatedata(rawdata,setMessage) {
     let flag = 0, msg = '';
-        if(rawdata.registerpassword !== rawdata.confirmregisterpassword){
+        if(rawdata.password !== rawdata.confirmregisterpassword){
             flag = 1
             msg+= "Password and Confirm Password do not match "; 
         }
-        if(rawdata.age < 18){
+        if((rawdata.age < 18) || (rawdata.age > 140)){
             if(flag === 1)msg+=" and ";
             flag=1
-            msg+=" You must be 18 years old to register"; 
+            msg+=" You must be between 18 and 140 years old to register"; 
         }
         if(flag === 1){
             setMessage(msg);
@@ -25,68 +27,106 @@ function validatedata(rawdata,setMessage) {
 
 export default function Register() {
     const [message, setMessage] = useState("");
+    const navigate = useNavigate();
 
     let handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(e.target);
+        // console.log(e.target);
         // Get the form Data
         let data = new FormData(e.target);
         let rawdata = Object.fromEntries(data.entries());
-        console.log(rawdata);
-        // Validate the passwords and age
+        if(rawdata.marketing === "true")  rawdata.marketing = true;
+        else rawdata.marketing = false;
+        // console.log(rawdata);
+        // Validate the passwords and age, if True then set message of errror
+
         if(validatedata(rawdata,setMessage) === true) return;
         
-        setMessage("Processing....");
+        setMessage("Registering....");
         try {
             // Actual call to API starts here
-            let res = await fetch(api_name, {
+            console.log("Calling API");
+            console.log(rawdata);
+            let res = await fetch(register_api ,  {
               method: "POST",
-              body: rawdata,
+              body: JSON.stringify(rawdata),
+              headers:{
+                    'Content-Type': 'application/json'
+                }
             })
-            let resJson = await res.json();
-            if (resJson.status === 200) {
-                setMessage("User Registered Successfully");
-                // redirect("/dashboard");
+            if (res.status === 200) {
+                let resJson = await res.json();
+                console.log(resJson);
+                setMessage("User Registered Successfully, Please Login Now at Login Page");
+                await(2000);
+                navigate("/login");
             }
-            else if(resJson.status === 400) {
-                setMessage(String(resJson.message));
+            else if(res.status === 422) {
+                let resJson = await res.json();
+                let str1 = resJson.message+"\n";
+                let  str2 = resJson.errors;
+                for (const [key, value] of Object.entries(str2)) {
+                    str1 += key + " : " + value + "\n";
+                }             
+                setMessage(String(str1));
+
+            }
+            else if(res.status === 500) {
+                setMessage("Server Error");
+            }
+            else{
+                console.log("kuch toh error hai");
+                setMessage("Unhandled Exception");
             }
         }  
         catch(err){
             console.log(err);
+            // setMessage(err);
         }
 
     }
  
      
     return (
-        <div>
+        <div class="flex justify-center leading-loose">
         
-        <form  onSubmit={handleSubmit} >
-            <label htmlFor='registeremail'>Email</label>
-            <input 
+        <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl"  onSubmit={handleSubmit} >
+        <p class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Register Here for Volunteer Connect</p>
+        <div class="grid grid-cols-2">
+            {/* <label htmlFor='registeremail'>Email</label> */}
+            <input class=" border-indigo-500 w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
             type= "email" name="email"
             placeholder="Email" id="registeremail" required  />
             
-            <label htmlFor='firstname'>FirstName</label>
-            <input 
-            type = "text" name="firstname"
-            placeholder="FirstName" id="firstname" required/>
+            {/* <label htmlFor='name'>Name</label> */}
+            <input class=" border-indigo-500 w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
+            type = "text" name="name"
+            placeholder="FirstName" id="name" required/>
             
-            <label htmlFor='lastname'>LastName</label>
+            {/* <label htmlFor='lastname'>LastName</label>
             <input 
             type = "text" name="lastname"
-            placeholder="LastName" id="lastname" required/>
+            placeholder="LastName" id="lastname" required/> */}
 
-            <label htmlFor='phonenumber'>Number</label>
+            <label htmlFor='phone'>Number</label>
             <input 
-            type = "phone" name="phonenumber"
-            placeholder="xxx-xxx-xxxx" id="phonenumber" required/>
+            type = "phone" name="phone"
+            placeholder="xxx-xxx-xxxx" id="phone" required/>
 
             <label htmlFor='address'>Address</label>
             <input 
             type = "text" name="address"
             placeholder="Address" id="address" required/>
+
+            <label htmlFor='city'>City</label>
+            <input 
+            type = "text" name="city"
+            placeholder="CITY" id="city" required/>
+
+            <label htmlFor="state">State</label>
+            <input 
+            type = "text" name="state"
+            placeholder="STATE" id="state" required/>
 
             <label htmlFor='zip'>Zip</label>
             <input 
@@ -108,87 +148,45 @@ export default function Register() {
             type = "text" name="company"
             placeholder="Company Name" id="company"/>
 
-            <label htmlFor='employeeid'>EmployeeID</label>
+            <label htmlFor='employee_id'>EmployeeID</label>
             <input 
-            type = "text" name='employeeid'
-            placeholder="Employee ID" id="employeeid"/>
+            type = "text" name='employee_id'
+            placeholder="Employee ID" id="employee_id"/>
             
-            <label htmlFor='registerpassword'>Password</label>
+            <label htmlFor='password'>Password</label>
             <input 
-            type = "password" name="registerpassword"
-            placeholder="Enter Password" id="registerpassword" required/>
+            type = "password" name="password"
+            placeholder="Enter Password" id="password" required/>
 
             <label htmlFor='confirmregisterpassword'>ConfirmPassword</label>
             <input 
             type = "password" name='confirmregisterpassword'
             placeholder="Re-enter Password" id="confirmregisterpassword" required/>
             
-            <label htmlFor='usertype'>Select Type of User</label>
-            <select id="usertype" name="usertype">
-                <option value="Volunteer">volunteer</option>
+            <label htmlFor='user_type'>Select Type of User</label>
+            <select id="user_type" name="user_type">
+                <option value="volunteer">volunteer</option>
                 <option value="admin">admin</option>
                 <option value="coordinator">coordinator</option>
             </select>
 
-            <label htmlFor='marketing'>Are you okay with Marketing Emails?</label>
+            <label htmlFor='marketing'>Do you want to recieve Marketing Emails?</label>
             <select id="marketing" name="marketing">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
+                <option value="true" >Yes</option>
+                <option value="false">No</option>
             </select>
 
-            <button type="submit" id="formsubmitbutton" >Register Me</button>
+            <button class="shadow bg-blue-700 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" 
+            type="submit" id="formsubmitbutton" >Register Me</button>
+            </div>
 
             {/* Error Message Class after this to embed react usestate */}
-            <div className="message">{message ? <p>{message}</p> : null}</div>
+            <div class="message">{message ? <p color='red'>{message}</p> : null}</div>
+
+            <h2>Already a User? Click <Link to='/login'>Here</Link> to Login</h2>
 
         </form>
-        <h2>Already a User? Click <Link to='/login'>Here</Link> to Login</h2>
+        
         </div>
     )
 }
-  
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-// export default function App() {
-//   return (
-    // <Router>
-    //   <Switch>
-    //     <Route path="/register">
-    //       <Register />
-    //     </Route>
-    //     <Route path="/login">
-    //       <Login />
-    //     </Route>
-    //     <Route path="/">
-    //       <Home />
-    //     </Route>
-    //   </Switch>
-    // </Router>
-//   );
-// }
-
-// let handleSubmit = async (e) => {
-    //     e.preventDefault();
-        // try {
-        //   let res = await fetch("https://httpbin.org/post", {
-        //     method: "POST",
-        //     body: JSON.stringify({
-        //       name: name,
-        //       email: email,
-        //       mobileNumber: mobileNumber,
-        //     }),
-        //   });
-    //       let resJson = await res.json();
-    //       if (res.status === 200) {
-    //         console.log("User Registered Successfully");
-    //       } 
-    //       else if(res.status === 400) {
-
-    //       }
-    //       else {
-    //         setMessage("Some error occured");
-    //       }
-    //     } catch (err) {
-    //       console.log(err);
-    //     }
-    //   };
