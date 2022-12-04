@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {rooturl} from "../config";
 
-const login_api = rooturl + "api/user/login";
 
 function validatedata (data,setMessage) {
     if (data.email === "") {
@@ -24,33 +23,33 @@ function validatedata (data,setMessage) {
 function Login() {
     const [message, setMessage] = useState("");
     const navigate = useNavigate()
+    
 
     let handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("entered submit");
-        console.log(e)
-
+        // console.log("entered submit");
+        // console.log(e)
         let data = new FormData(e.target);
         let rawdata = Object.fromEntries(data.entries());
-        console.log(rawdata);
-        // check form data
+        // console.log(rawdata);
+        // // check form data
 
         if(validatedata(rawdata,setMessage) === false) return;
         
         try {
-            // Actual call to API starts here
-            let res = await fetch(login_api, {
+            let res = await fetch(rooturl + "users/login", {
               method: "POST",
               credentials: 'include',
               body: JSON.stringify(rawdata),
               headers:{
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             }
 
             })
-            
+            console.log(res);
             if (res.status === 200) {
                 let resJson = await res.json();
+                localStorage.setItem("token", resJson.token);
                 setMessage("User Logged In Successfully");
                 await(20000);
                 if(resJson.user_type === "volunteer") {

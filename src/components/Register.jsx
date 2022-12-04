@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {rooturl} from "../config.js";
 
 // API_NAME
-const register_api = rooturl+"api/user/register";
+const register_api = rooturl+"users/register";
 
 function validatedata(rawdata,setMessage) {
     let flag = 0, msg = '';
@@ -37,23 +37,29 @@ export default function Register() {
         let rawdata = Object.fromEntries(data.entries());
         if(rawdata.marketing === "true")  rawdata.marketing = true;
         else rawdata.marketing = false;
+        
         // console.log(rawdata);
         // Validate the passwords and age, if True then set message of errror
 
         if(validatedata(rawdata,setMessage) === true) return;
-        
+        delete rawdata.confirmregisterpassword;
         setMessage("Registering....");
         try {
             // Actual call to API starts here
             console.log("Calling API");
-            console.log(rawdata);
+            console.log(JSON.stringify(rawdata));
+
             let res = await fetch(register_api ,  {
+            // credentials: 'include',
+            // mode: 'no-cors',
               method: "POST",
               body: JSON.stringify(rawdata),
               headers:{
                     'Content-Type': 'application/json'
                 }
             })
+            console.log(res);
+
             if (res.status === 200) {
                 let resJson = await res.json();
                 console.log(resJson);
@@ -61,14 +67,14 @@ export default function Register() {
                 await(2000);
                 navigate("/login");
             }
-            else if(res.status === 422) {
+            else if(res.status === 401) {
                 let resJson = await res.json();
-                let str1 = resJson.message+"\n";
-                let  str2 = resJson.errors;
-                for (const [key, value] of Object.entries(str2)) {
-                    str1 += key + " : " + value + "\n";
-                }             
-                setMessage(String(str1));
+                // let str1 = resJson.message+"\n";
+                // let  str2 = resJson.errors;
+                // for (const [key, value] of Object.entries(str2)) {
+                //     str1 += key + " : " + value + "\n";
+                // }             
+                setMessage(String(resJson.error));
 
             }
             else if(res.status === 500) {
