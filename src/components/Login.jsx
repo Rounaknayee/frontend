@@ -21,6 +21,7 @@ function validatedata (data,setMessage) {
 }
 
 function Login() {
+    
     const [message, setMessage] = useState("");
     const navigate = useNavigate()
     
@@ -50,6 +51,7 @@ function Login() {
             if (res.status === 200) {
                 let resJson = await res.json();
                 localStorage.setItem("token", resJson.token);
+                console.log(resJson.token);
                 setMessage("User Logged In Successfully");
                 await(20000);
                 if(resJson.user_type === "volunteer") {

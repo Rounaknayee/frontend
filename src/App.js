@@ -19,11 +19,7 @@ function App() {
             <Route path='/login' element={<Login/>} />
             <Route path='/register' element={<Register/>} />
             <Route path='/userdashboard' element={<UserDashboard/>} />
-            
-
             <Route path='/admindashboard' element={<AdminDashboard/>} />
-
-
             <Route path="*" element={<NotFound/>}/>
         </Routes>
       </Router>

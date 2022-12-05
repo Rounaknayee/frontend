@@ -2,16 +2,43 @@ import React,{useState} from "react"
 import UserDash from "./UserDash"
 import UserShifts from "./UserShifts"
 import UserProfile from "./UserProfile"
-import { checktoken } from "../config"
+// import { checktoken }from "../config"
+import { useEffect } from "react"
+import { rooturl } from "../config"
 
 
 export default function UserDashboard() {
-    if(checktoken())console.log("Token is valid");
-    else{
-        console.log("Token is not valid");
-        window.location.href = "/login";
-    } 
-    const [Component, setComponent] = useState(<UserDash/>);
+    // Promise.all([checktoken()]).then((values) => {
+    //     console.log(values);
+    //     if(values[0] == false) {
+    //         window.location.href = "/login";
+    //     }
+    //     else{
+    //         console.log("user logged in");
+    //     }
+    // });
+    let loader = '<div><h1>loader</h1></div>'
+    useEffect(() => {
+        let token = localStorage.getItem('token');
+        fetch(rooturl + 'users/verify/', {
+            method: "GET",
+            credentials: 'include',
+            headers:{
+                'x-access-token': token,
+                }
+
+        }).then((res) => {
+        if (res.status === 200) {
+            console.log("token is valid by checktoken");
+            setComponent(<UserDash/>);
+        } else {
+            console.log("token is invalid by checktoken");       
+            window.location.href = "/login";
+        }}).catch((error) => {
+            console.log("token is invalid by checktoken");
+        });
+    },[])
+    const [Component, setComponent] = useState(loader);
 
     function swap(e) {
         if (e===0){
@@ -24,8 +51,7 @@ export default function UserDashboard() {
             setComponent(<UserShifts/>)
         }        
     }
-
-  return (
+ return (
     <div class = "h-full ">
         <aside class="h-full w-64" aria-label="Sidebar">
         <div class="overflow-y-auto py-4 px-3 bg-white-50 dark:bg-gray-800">
