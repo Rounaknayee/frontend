@@ -4,7 +4,9 @@ import UserShifts from "./UserShifts"
 import UserProfile from "./UserProfile"
 // import { checktoken }from "../config"
 import { useEffect } from "react"
-import { rooturl } from "../config"
+import { rooturl,loader } from "../config"
+import Navbar from "./Navbar"
+
 
 
 export default function UserDashboard() {
@@ -17,10 +19,15 @@ export default function UserDashboard() {
     //         console.log("user logged in");
     //     }
     // });
-    let loader = '<div><h1>loader</h1></div>'
+    
     useEffect(() => {
+        if(localStorage.getItem('user_type')!=='volunteer'){
+            window.location.href = "/login";
+            localStorage.clear();
+            alert("You are not a Volunteer");
+        }
         let token = localStorage.getItem('token');
-        fetch(rooturl + 'users/verify/', {
+        fetch(rooturl + '/users/verify/', {
             method: "GET",
             credentials: 'include',
             headers:{
@@ -36,6 +43,7 @@ export default function UserDashboard() {
             window.location.href = "/login";
         }}).catch((error) => {
             console.log("token is invalid by checktoken");
+            window.location.href = "/login";
         });
     },[])
     const [Component, setComponent] = useState(loader);
@@ -51,27 +59,34 @@ export default function UserDashboard() {
             setComponent(<UserShifts/>)
         }        
     }
+
  return (
-    <div class = "h-full ">
-        <aside class="h-full w-64" aria-label="Sidebar">
-        <div class="overflow-y-auto py-4 px-3 bg-white-50 dark:bg-gray-800">
-        <ul class="space-y-2">
-            <li class="px-2 py-1.5 rounded-md bg-gray-100 dark:bg-gray-700">
-            <button  onClick={()=>swap(0)} >Dashboard</button>
-            </li>
-            <li class="px-2 py-1.5 rounded-md {} dark:bg-gray-700">
-            <button  onClick={()=>swap(1)} >Profile</button>
-            </li>
-            <li class="px-2 py-1.5 rounded-md bg-gray-100 dark:bg-gray-700">
-            <button onClick={()=>swap(2)} >shifts</button>
-            </li>
-        </ul>
-         
-         </div>
-         </aside>
-         <div>
-            {Component}
-         </div>
+    <div>
+        <Navbar/>
+        <div className="flex">
+            <aside  aria-label="Sidebar">
+                
+            <div className="w-40 h-screen bg-blue-800 p-5">
+            <ul>
+                <li>    
+                <button className="my-10 w-full py-2 text-2x1 rounded font-semibold text-white hover:bg-blue-200 hover:text-blue-800" 
+                onClick={()=>swap(0)}>Dashboard</button>
+                </li>
+                <li>
+                <button className=" my-10 w-full py-2 text-2x1 rounded font-semibold text-white hover:bg-blue-200 hover:text-blue-800" 
+                onClick={()=>swap(1)} >Profile</button>
+                </li>
+                <li>
+                <button className="my-10 w-full py-2 text-2x1 rounded font-semibold text-white hover:bg-blue-200 hover:text-blue-800" 
+                onClick={()=>swap(2)} >shifts</button>
+                </li>
+            </ul>
+            </div>
+            </aside>
+            <div className="p-7 text-2x1 font-semibold">
+                {Component}
+            </div>
+        </div>
     </div>
   )
 }

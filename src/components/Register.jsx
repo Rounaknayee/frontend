@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {rooturl} from "../config.js";
 
 // API_NAME
-const register_api = rooturl+"users/register";
+const register_api = rooturl+"/users/register";
 
 function validatedata(rawdata,setMessage) {
     let flag = 0, msg = '';
@@ -64,6 +64,7 @@ export default function Register() {
                 let resJson = await res.json();
                 console.log(resJson);
                 setMessage("User Registered Successfully, Please Login Now at Login Page");
+                alert("User Registered Successfully, Please Login Now at Login Page");
                 await(2000);
                 navigate("/login");
             }
@@ -79,6 +80,11 @@ export default function Register() {
             }
             else if(res.status === 500) {
                 setMessage("Server Error");
+
+            }
+            else if(res.status === 422) {
+                let resJson = await res.json();
+                setMessage(String(resJson.error));
             }
             else{
                 console.log("kuch toh error hai");
@@ -98,92 +104,181 @@ export default function Register() {
         
         <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl"  onSubmit={handleSubmit} >
         <p class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Register Here for Volunteer Connect</p>
-        <div class="grid grid-cols-2">
-            {/* <label htmlFor='registeremail'>Email</label> */}
-            <input class=" border-indigo-500 w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
-            type= "email" name="email"
-            placeholder="Email" id="registeremail" required  />
-            
-            {/* <label htmlFor='name'>Name</label> */}
-            <input class=" border-indigo-500 w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
-            type = "text" name="name"
-            placeholder="FirstName" id="name" required/>
+        <div class="flex flex-wrap">
+            <div className='w-1/2 px-2'>
+            <label 
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='registeremail'>Email</label>
+            <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+            // class=" border-indigo-500 px-5 py-1 text-gray-700 bg-gray-200 rounded"
+            type= "email" 
+            name="email"
+            placeholder="Email" 
+            id="registeremail"
+            required/>
+            </div>
+
+            <div className='w-1/2 px-2'>
+            <label 
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='name'>Name</label>
+            <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+            type = "text" 
+            name="name"
+            placeholder="FirstName"
+            id="name" 
+            required/>
+            </div>
             
             {/* <label htmlFor='lastname'>LastName</label>
             <input 
             type = "text" name="lastname"
             placeholder="LastName" id="lastname" required/> */}
 
-            <label htmlFor='phone'>Number</label>
+            <div className='w-1/2 px-2'>
+            <label 
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='phone'>Number</label>
             <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             type = "phone" name="phone"
             placeholder="xxx-xxx-xxxx" id="phone" required/>
 
-            <label htmlFor='address'>Address</label>
+            </div>
+            
+            <div className='w-1/2 px-2'>
+            <label
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='age'>Age</label>
             <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+            type = "number" name="age"
+            placeholder="18 Years Minimum" id="age" 
+            required/>
+            </div>
+
+            <div className='w-full px-2'>
+            <label 
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='address'>Address</label>
+            <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             type = "text" name="address"
             placeholder="Address" id="address" required/>
+            </div>
 
-            <label htmlFor='city'>City</label>
+            <div className='w-1/2 px-2'>
+            <label
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='city'>City</label>
             <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             type = "text" name="city"
             placeholder="CITY" id="city" required/>
+            </div>
 
-            <label htmlFor="state">State</label>
+            <div className='w-1/2 px-2'>
+            <label
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor="state">State</label>
             <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             type = "text" name="state"
             placeholder="STATE" id="state" required/>
+            </div>
 
-            <label htmlFor='zip'>Zip</label>
+            <div className='w-1/2 px-2'>
+            <label
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='zip'>Zip</label>
             <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             type = "number" name="zip"
             placeholder="xxxxxx" id="zip" required/>
-
-            <label htmlFor='country'>Country</label>
+            </div>
+            
+            <div className='w-1/2 px-2'>
+            <label
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='country'>Country</label>
             <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             type = "text" name="country"
             placeholder="country" id="country" required/>
+            </div>
 
-            <label htmlFor='age'>Age</label>
+            
+            <div className='w-1/3 px-2'>
+            <label
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='company'>Company</label>
             <input 
-            type = "number" name="age"
-            placeholder="18 Years Minimum" id="age" required/>
-
-            <label htmlFor='company'>Company</label>
-            <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             type = "text" name="company"
             placeholder="Company Name" id="company"/>
+            </div>
 
-            <label htmlFor='employee_id'>EmployeeID</label>
+            <div className='w-1/3 px-2'>
+            <label
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+             htmlFor='employee_id'>EmployeeID</label>
             <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             type = "text" name='employee_id'
             placeholder="Employee ID" id="employee_id"/>
-            
-            <label htmlFor='password'>Password</label>
-            <input 
-            type = "password" name="password"
-            placeholder="Enter Password" id="password" required/>
+            </div>
 
-            <label htmlFor='confirmregisterpassword'>ConfirmPassword</label>
-            <input 
-            type = "password" name='confirmregisterpassword'
-            placeholder="Re-enter Password" id="confirmregisterpassword" required/>
-            
-            <label htmlFor='user_type'>Select Type of User</label>
-            <select id="user_type" name="user_type">
+            <div className='w-1/3 px-2'>
+            <label
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='user_type'>Select Type of User</label>
+            <select 
+            className='appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500'
+            id="user_type" name="user_type">
                 <option value="volunteer">volunteer</option>
                 <option value="admin">admin</option>
                 <option value="coordinator">coordinator</option>
             </select>
+            </div>
+            
+            <div className='w-1/2 px-2'>
+            <label
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='password'>Password</label>
+            <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+            type = "password" name="password"
+            placeholder="Enter Password" id="password" required/>
+            </div>
 
-            <label htmlFor='marketing'>Do you want to recieve Marketing Emails?</label>
+            <div className='w-1/2 px-2'>
+            <label
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            htmlFor='confirmregisterpassword'>ConfirmPassword</label>
+            <input 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+            type = "password" name='confirmregisterpassword'
+            placeholder="Re-enter Password" id="confirmregisterpassword" required/>
+            </div>
+
+            <div className='w-1/2 px-2'>
+            <label
+            className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+            
+            htmlFor='marketing'>Do you want to recieve Marketing Emails?</label>
             <select id="marketing" name="marketing">
                 <option value="true" >Yes</option>
                 <option value="false">No</option>
             </select>
+            </div>
 
-            <button class="shadow bg-blue-700 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" 
+            <div className='w-1/2 p-2'>
+            <button 
+            class=" h-full shadow w-full bg-blue-700 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold  rounded" 
             type="submit" id="formsubmitbutton" >Register Me</button>
+            </div>
             </div>
 
             {/* Error Message Class after this to embed react usestate */}

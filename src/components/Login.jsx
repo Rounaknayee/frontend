@@ -38,7 +38,7 @@ function Login() {
         if(validatedata(rawdata,setMessage) === false) return;
         
         try {
-            let res = await fetch(rooturl + "users/login", {
+            let res = await fetch(rooturl + "/users/login", {
               method: "POST",
               credentials: 'include',
               body: JSON.stringify(rawdata),
@@ -54,7 +54,9 @@ function Login() {
                 console.log(resJson.token);
                 setMessage("User Logged In Successfully");
                 await(20000);
-                if(resJson.user_type === "volunteer") {
+                localStorage.setItem("user_type", resJson.user_type);
+                console.log(resJson.user_type);
+                if(resJson.user_type === "volunteer") {                    
                     navigate("/userdashboard");
                 }
                 else if(resJson.user_type === "admin") {
@@ -66,12 +68,13 @@ function Login() {
             }
             else if(res.status === 401) {
                 let resJson = await res.json();
-                setMessage(String(resJson.message));
+                console.log(resJson.error);
+                setMessage(String(resJson.error));
             }
-            else if(res.status === 401) {
-                let resJson = await res.json();
-                setMessage(String(resJson.message));
-            }
+            // else if(res.status === 401) {
+            //     let resJson = await res.json();
+            //     setMessage(String(resJson.message));
+            // }
 
         }  
         catch(err){
@@ -105,12 +108,16 @@ function Login() {
                 </div> */}
 
                 {/* Error Message Class after this to embed react usestate */}
-                <div class="message">{message ? <p color='red'>{message}</p> : null}</div>
+                
+                {message ? 
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                <p class="font-bold">{message}</p> 
+                </div> : null}
 
-                <button class="shadow bg-blue-700 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" 
+                <button class="shadow mt-2 bg-blue-700 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" 
                  type="submit" >Login</button>
                 
-                    <div class="text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out mb-4">
+                    <div class="text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out mt-4">
                     <h2>New User? Click 
                         <Link to='/register'> <u>Here</u> </Link> 
                         to register</h2>
