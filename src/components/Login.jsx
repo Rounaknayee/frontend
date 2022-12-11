@@ -84,20 +84,32 @@ function Login() {
 
     return(
         <div>
-        <div class="flex justify-center leading-loose">            
+        <div class="flex justify-center leading-loose">   
+                 
             <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl" onSubmit={handleSubmit}>
-            <p class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Login for volunteer Connect</p>
-                <div class="relative my-6"></div>
-                <label class="block text-sm text-gray-00" htmlFor="email">Email</label>
-                <input class="border-indigo-500 w-full px-5 py-1 text-gray-700 bg-gray-200 " 
-                type="email" name="email" id="email" placeholder="Email" required />
-
-                <div class="relative my-6"></div>
-                <label class="block text-sm text-gray-00 " htmlFor='password'>Password</label>
-                <input class="border-blue-500 w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
-                 name="password" type="password" id='password' placeholder="Password" required />
+            <div class="w-3/4">
+            <img src = "./techimpact_logo.png " alt = "logo" className="align-left w-40 object-contain bg-gray-200 "/>
+            </div>
+            <p class="mt-3 text-center text-2xl font-bold tracking-tight text-gray-900">Login Here for Volunteer Connect</p>
                 
-                <div class="relative my-6"></div>
+                <label 
+                className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
+                htmlFor="email">Email</label>
+                <input 
+                className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                type="email" name="email" 
+                id="email" placeholder="Email" 
+                required />
+
+                <label 
+                className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1" 
+                htmlFor='password'>Password</label>
+                <input 
+                className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                name="password" type="password" 
+                id='password' placeholder="Password" 
+                required />
+                
                 {/* <div class="relative my-6">
                 <select id="usertype" class="border-blue-500 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:bg-white focus:border-blue-500">
         
@@ -114,10 +126,10 @@ function Login() {
                 <p class="font-bold">{message}</p> 
                 </div> : null}
 
-                <button class="shadow mt-2 bg-blue-700 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" 
+                <button class="shadow mt-3 bg-blue-700 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" 
                  type="submit" >Login</button>
                 
-                    <div class="text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out mt-4">
+                    <div class="text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out mt-3">
                     <h2>New User? Click 
                         <Link to='/register'> <u>Here</u> </Link> 
                         to register</h2>

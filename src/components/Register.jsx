@@ -102,8 +102,11 @@ export default function Register() {
     return (
         <div class="flex justify-center leading-loose">
         
-        <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl"  onSubmit={handleSubmit} >
-        <p class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Register Here for Volunteer Connect</p>
+        <form class="max-w-xl m-4 py-3 px-10 bg-white rounded shadow-xl"  onSubmit={handleSubmit} >
+        <div class="w-3/4 px-2">
+        <img src = "./techimpact_logo.png " alt = "logo" className="align-left w-40 object-contain bg-gray-200 "/>
+        </div>
+        <p class="px-2 py-2 text-2xl font-bold tracking-tight text-gray-900">Register Here for Volunteer Connect</p>
         <div class="flex flex-wrap">
             <div className='w-1/2 px-2'>
             <label 
@@ -263,28 +266,33 @@ export default function Register() {
             placeholder="Re-enter Password" id="confirmregisterpassword" required/>
             </div>
 
-            <div className='w-1/2 px-2'>
+            <div className='w-2/3 px-2'>
             <label
             className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
             
-            htmlFor='marketing'>Do you want to recieve Marketing Emails?</label>
-            <select id="marketing" name="marketing">
+            htmlFor='marketing'>Recieve Marketing Emails?</label>
+            <select 
+            className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+            id="marketing" name="marketing">
                 <option value="true" >Yes</option>
                 <option value="false">No</option>
             </select>
             </div>
 
-            <div className='w-1/2 p-2'>
+            <div className='w-1/3 px-2 mt-3'>
             <button 
             class=" h-full shadow w-full bg-blue-700 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold  rounded" 
             type="submit" id="formsubmitbutton" >Register Me</button>
             </div>
             </div>
 
-            {/* Error Message Class after this to embed react usestate */}
-            <div class="message">{message ? <p color='red'>{message}</p> : null}</div>
-
-            <h2>Already a User? Click <Link to='/login'>Here</Link> to Login</h2>
+            {message ? 
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+            <p class="font-bold">{message}</p> 
+            </div> : null}
+            
+            <div class="px-2 text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out ">
+                 <Link to='/login'>Already a User? Click <u>Here</u> to Login</Link> </div>
 
         </form>
         

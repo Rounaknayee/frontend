@@ -5,6 +5,8 @@ import { loader,rooturl} from "../config";
 import Adminfileupload from "./Adminfileupload";
 import Adminaddshifts from "./Adminaddshifts";
 import Navbar from "./Navbar";
+import Admingetshifts from "./Admingetshifts";
+
 
 
 export default function AdminDashboard() {
@@ -49,13 +51,13 @@ export default function AdminDashboard() {
             setComponent(<Adminfileupload/>)
         }
         else if (e===2){
-            setComponent("<UserShifts/>")
+            setComponent(<Admingetshifts/>)
         }        
     }
     return (
         <div>
         <Navbar />
-        <div className="flex">
+        <div className="flex ">
             <aside  aria-label="Sidebar">
                 
             <div className="w-40 h-screen bg-blue-800 p-5">

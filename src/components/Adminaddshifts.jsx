@@ -55,7 +55,7 @@ function Adminaddshifts() {
         else if(response.status === 422){
             // console.log(error);
             setColor('bg-red-100 border border-red-400 text-red-700');
-            setMessage(data);
+            setMessage(data.error);
             // setMessage("error");
         }
 
@@ -98,6 +98,7 @@ function Adminaddshifts() {
             className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             id="end-time"
             type="time"
+            step={900}
             value={endTime}
             onChange={(event) => setEndTime(event.target.value)}
           required />
@@ -131,7 +132,11 @@ function Adminaddshifts() {
             className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             id="max-volunteers"
             type="number"
-            min="1"            
+            // max="20"
+            // min={1} 
+            max={20}
+            min={1}
+                       
             placeholder="Greater than 0"
             value={maxVolunteers}
             onChange={(event) => setMaxVolunteers(event.target.value)}

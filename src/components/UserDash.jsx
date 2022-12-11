@@ -66,7 +66,6 @@ export default function UserDash() {
     <div>
     <div>welcome to your Dashboard</div>
     <div class="block w-40 h-25 p-6 bg-white border border-gray-200 rounded-lg shadow-md  dark:bg-gray-800 ">
-    <h5 class=" text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
     </div>
     <table class="table-auto">
       <thead>
