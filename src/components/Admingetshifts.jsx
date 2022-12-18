@@ -51,7 +51,8 @@ function Admingetshifts() {
             // console.log(response);
             // console.log("raw data");
             const data = response.data.shifts
-            // console.log(data);
+
+            console.log(data);
             // console.log("processed data")
 
             if (response.status === 200 && data.length > 0) {

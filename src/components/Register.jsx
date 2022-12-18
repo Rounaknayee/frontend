@@ -274,8 +274,14 @@ export default function Register() {
             <select 
             className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             id="marketing" name="marketing">
-                <option value="true" >Yes</option>
-                <option value="false">No</option>
+                
+                <option 
+                value="true"
+                selected
+                >Yes</option>
+                <option 
+                value="false">No</option>
+                
             </select>
             </div>
 

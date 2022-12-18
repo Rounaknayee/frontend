@@ -1,10 +1,13 @@
 import React from 'react'
-
+import Profile from './Profile'
 function UserProfile() {
 
   
   return (
-    <div>UserProfile</div>
+    <div>
+      
+      <Profile />
+    </div>
   )
 }
 

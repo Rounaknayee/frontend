@@ -6,6 +6,7 @@ import Adminfileupload from "./Adminfileupload";
 import Adminaddshifts from "./Adminaddshifts";
 import Navbar from "./Navbar";
 import Admingetshifts from "./Admingetshifts";
+import Profile from "./Profile";
 
 
 
@@ -53,6 +54,9 @@ export default function AdminDashboard() {
         else if (e===2){
             setComponent(<Admingetshifts/>)
         }        
+        else if (e===3){
+            setComponent(<Profile />)
+        }
     }
     return (
         <div>
@@ -73,6 +77,10 @@ export default function AdminDashboard() {
                 <li>
                 <button className="my-10 w-full py-2 text-2x1 rounded font-semibold text-white hover:bg-blue-200 hover:text-blue-800" 
                 onClick={()=>swapadmin(2)}>Active Shifts</button>
+                </li>
+                <li>
+                <button className="my-10 w-full py-2 text-2x1 rounded font-semibold text-white hover:bg-blue-200 hover:text-blue-800"
+                onClick={()=>swapadmin(3)}>Profile</button>
                 </li>
             </ul>
             </div>

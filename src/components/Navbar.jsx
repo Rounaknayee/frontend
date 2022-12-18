@@ -26,17 +26,17 @@ function Navbar() {
         
     }
   return (
-    <div>
+    <div >
         <nav
         class="flex bg-white shadow border-solid py-4 border-t-2 border-blue-700">
-        <div class="w-3/4">
+        <div className="w-3/4">
         <img src = "./techimpact_logo.png " alt = "logo" className="align-left ml-5  w-40 object-contain bg-gray-200 "/>
         </div>
-        <div class="align-left ">
+        <div className="item-end">
 
-            <div class="f">
+            <div className="flex align-right">
                 <button onClick={handlelogout}
-                   class="block align-left px-4 py-2 rounded border text-blue-700 font-bold hover:text-white hover:bg-blue-700 ">logout</button>
+                   className="block align-right px-4 py-2 rounded border text-blue-700 font-bold hover:text-white hover:bg-blue-700 ">logout</button>
             </div>
         </div>    
         </nav>
