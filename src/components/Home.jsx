@@ -51,20 +51,18 @@ function Home() {
             <div className="flex justify-between w-64">
 
             <Link to='/register'>
-            <button type="button" class="text-white bg-gradient-to-tr from-green-600 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+            <button type="button" class="text-white bg-gradient-to-tr from-green-600 to-blue-600 hover:bg-white font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
             Register
             </button>
             </Link>
             <Link to='/login'>
-            <button type="button" class="text-white bg-gradient-to-tr from-green-600 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+            <button type="button" class="text-white bg-gradient-to-tr from-green-600 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
             Login
             </button>
             </Link>
             </div>
-
             </div>
-
-            <footer class="fixed bottom-0 w-full h-20 bg-white border-solid border-t-2 border-blue-700 p-5 align-center">
+            <footer class="fixed bottom-0 shadow-2xl w-full h-18 bg-white border-solid border-t-2 border-blue-700 p-5 align-center">
                 <p className="text-center text-gray-500 text-1xl">
                     &copy;2022 Tech Impact. All rights reserved.
                 </p>

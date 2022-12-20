@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { loader,rooturl} from "../config";
-import Adminfileupload from "./Adminfileupload";
+import Fileupload from "./Fileupload";
 import Adminaddshifts from "./Adminaddshifts";
 import Navbar from "./Navbar";
 import Admingetshifts from "./Admingetshifts";
@@ -49,7 +49,7 @@ export default function AdminDashboard() {
             setComponent(<Adminaddshifts/>)
         }
         else if (e===1){
-            setComponent(<Adminfileupload/>)
+            setComponent(<Fileupload urlname="/admin/upload/"/>)
         }
         else if (e===2){
             setComponent(<Admingetshifts/>)

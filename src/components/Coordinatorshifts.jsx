@@ -1,11 +1,11 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState,useEffect } from 'react'
+import { loader,rooturl} from "../config";
 
 
-import { rooturl,loader } from '../config'
+function Coordinatorshifts() {
 
-export default function UserShifts() {
-  // const[]
+    // const[]
   const [data, setData] = useState([]);
   const [message, setMessage] = useState('');
   // const [loading, setLoading] = useState(true);
@@ -32,36 +32,37 @@ export default function UserShifts() {
     );
     setData(filtered);
   }
-
-
   const handleregisterforshift = async(id) => {
-    let response = await fetch(`${rooturl}/shifts/registershift/${id}`, {
-      method: "POST",
-      credentials: 'include',
-      headers:{
-          'x-access-token': localStorage.getItem('token'),
-          }
-        })
-
-    console.log(response);
-    let data = await response.json();
-    console.log(data);
-
-    if (response.status === 200) {
-      // setData(data.filter(job => job.id !== id));
-      setColor('bg-green-100 border border-green-400 text-green-700');
-      setMessage("Registered for shift");
-    }
-    else if (response.status === 400 || response.status === 401 || response.status === 404) {
-      setColor('bg-red-100 border border-red-400 text-red-700');
-      setMessage(data.error);
-    }
-    else {
-      console.log("error");
-      setColor('bg-red-100 border border-red-400 text-red-700');
-      setMessage(`Couldn't Register for shift ${id} error`);
-    }
   }
+
+//   const handleregisterforshift = async(id) => {
+//     let response = await fetch(`${rooturl}/shifts/registershift/${id}`, {
+//       method: "POST",
+//       credentials: 'include',
+//       headers:{
+//           'x-access-token': localStorage.getItem('token'),
+//           }
+//         })
+
+//     console.log(response);
+//     let data = await response.json();
+//     console.log(data);
+
+//     if (response.status === 200) {
+//       // setData(data.filter(job => job.id !== id));
+//       setColor('bg-green-100 border border-green-400 text-green-700');
+//       setMessage("Registered for shift");
+//     }
+//     else if (response.status === 400 || response.status === 401 || response.status === 404) {
+//       setColor('bg-red-100 border border-red-400 text-red-700');
+//       setMessage(data.error);
+//     }
+//     else {
+//       console.log("error");
+//       setColor('bg-red-100 border border-red-400 text-red-700');
+//       setMessage(`Couldn't Register for shift ${id} error`);
+//     }
+//   }
 
   const fetchfromdb = async() => {
             let response = await fetch(`${rooturl}/shifts/getshifts`, {
@@ -105,7 +106,7 @@ export default function UserShifts() {
     <div>
     <div
     className='text-center text-2xl font-bold text-green-600 my-2'
-    >Available shifts</div>
+    >Your Company's shifts</div>
     {/* <div class="block w-40 h-25 p-6 bg-white border border-gray-200 rounded-lg shadow-md  dark:bg-gray-800 ">
     </div> */}
 
@@ -206,4 +207,9 @@ export default function UserShifts() {
      : null}
   </div>
   )
+
+
+
 }
+
+export default Coordinatorshifts

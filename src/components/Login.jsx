@@ -32,7 +32,13 @@ function Login() {
         // console.log(e)
         let data = new FormData(e.target);
         let rawdata = Object.fromEntries(data.entries());
-        // console.log(rawdata);
+        if (rawdata.remember === "on") {
+            rawdata.remember = true;
+        }
+        else {
+            rawdata.remember = false;
+        }
+        console.log(rawdata);
         // // check form data
 
         if(validatedata(rawdata,setMessage) === false) return;
@@ -66,7 +72,7 @@ function Login() {
                     navigate("/coordinatordashboard");
                 }
             }
-            else if(res.status === 401) {
+            else {
                 let resJson = await res.json();
                 console.log(resJson.error);
                 setMessage(String(resJson.error));
@@ -109,6 +115,15 @@ function Login() {
                 name="password" type="password" 
                 id='password' placeholder="Password" 
                 required />
+
+                <div className='mt-2'>
+                    <label class="block text-gray-500 font-bold" for="remember">
+                        <input class="leading-tight" type="checkbox" id="remember" name="remember"/>
+                        <span class="text-sm pl-2">
+                            remember me
+                        </span>
+                    </label>
+                </div>
                 
                 {/* <div class="relative my-6">
                 <select id="usertype" class="border-blue-500 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:bg-white focus:border-blue-500">
