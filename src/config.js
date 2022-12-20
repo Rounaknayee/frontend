@@ -1,4 +1,4 @@
-export const rooturl =  "http://192.168.6.153:8000";
+export const rooturl =  process.env.WEBSITE_URL || "http://localhost:8000";
 
 export function checktoken (){
     let token = localStorage.getItem('token');
