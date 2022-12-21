@@ -212,7 +212,7 @@ export default function Register() {
             <div className='w-1/3 px-2'>
             <label
             className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
-             htmlFor='employee_id'>EmployeeID</label>
+             htmlFor='employee_id'>Employer ID</label>
             <input 
             className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             type = "text" name='employee_id'
