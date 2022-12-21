@@ -90,6 +90,7 @@ export default function UserDash() {
         type="text"
         placeholder="Search Here"
         // value={search}
+        id="userdashsearch"
         onChange={handlesearch}
         className="border border-blue-400 text-black-600 w-full p-2"
         />
@@ -153,11 +154,13 @@ export default function UserDash() {
             jobs.max_volunteers.toString().includes(search.toLocaleLowerCase())
 
           ).map((shifts) => {
+              const index = jobs.indexOf(shifts)+1;
               return (
+                
                 <tr>
                     <td
                     className="border border-blue-400  w-1/12 p-2"
-                    >{shifts.id}</td>
+                    >{index}</td>
 
                     <td
                     className="border border-blue-400  w-1/12 p-2"
@@ -193,6 +196,7 @@ export default function UserDash() {
                       
                     <button 
                     className="bg-red-500 border hover:bg-white hover:text-red-500 hover:border hover:border-red-500 text-white font py-2 px-4 rounded"
+                    id = {`delete-job-button-${index}`}
                     onClick={() => handledeletejob(shifts.id)}> 
                     Drop Job 
                     </button>
@@ -212,7 +216,7 @@ export default function UserDash() {
   </table>
   {message ? 
     <div className={`bg-${color}-100 border border-${color}-400 text-${color}-700  px-4 py-3 rounded relative`}>
-    <p class="font-bold">{message}</p>
+    <p id = "message-pop" class="font-bold">{message}</p>
     </div>
      : null}
   </div>

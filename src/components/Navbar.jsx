@@ -36,7 +36,8 @@ function Navbar() {
 
             <div className="flex align-right">
                 <button onClick={handlelogout}
-                   className="block align-right px-4 py-2 rounded border text-blue-700 font-bold hover:text-white hover:bg-blue-700 ">logout</button>
+                   className="block align-right px-4 py-2 rounded border text-blue-700 font-bold hover:text-white hover:bg-blue-700 "
+                   id= "logout-button">logout</button>
             </div>
         </div>    
         </nav>

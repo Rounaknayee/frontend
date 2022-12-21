@@ -274,7 +274,7 @@ export default function Register() {
             <div className='w-1/3 px-2 mt-3'>
             <button 
             class=" h-full shadow w-full bg-blue-700 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold  rounded" 
-            type="submit" id="formsubmitbutton" >Register Me</button>
+            type="submit" id="register-button" >Register Me</button>
             </div>
             </div>
             <div className='p-5'>

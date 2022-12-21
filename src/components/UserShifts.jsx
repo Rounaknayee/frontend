@@ -27,9 +27,11 @@ function Modal({ show, onClose, onRegister }) {
                     </div>
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                         <button 
+                        id = "modal-accept"
                         onClick={onRegister}
                         data-modal-toggle="defaultModal" type="button" class="text-bold text-white border bg-green-500 hover:bg-white hover:text-green-500 hover:border hover:border-green-500 text-sm font-medium px-5 py-2.5  focus:z-10 rounded-lg">Accept & Register</button>
                         <button 
+                        id="modal-decline"
                         onClick={onClose}
                         data-modal-toggle="defaultModal" type="button" class="text-bold text-white border bg-red-500 hover:bg-white hover:text-red-500 hover:border hover:border-red-500 text-sm font-medium px-5 py-2.5  focus:z-10 rounded-lg ">Decline</button>
                     </div>
@@ -140,6 +142,7 @@ export default function UserShifts() {
         type="text"
         placeholder="Search Here ..."
         onChange={handlesearch}
+        id="usershiftsearch"
         className="border border-blue-400 text-black-600  p-2"
         />
         <button
@@ -210,7 +213,9 @@ export default function UserShifts() {
                   <td className="border border-blue-400  w-3/12 p-2">{shifts.description}</td>
                   <td className="border border-blue-400  w-1/12 p-2">
                     <button 
-                    type="button" data-modal-toggle="defaultModal" 
+                    type="button" 
+                    id={`shift-register-button-${index}`}
+                    data-modal-toggle="defaultModal" 
                     onClick = {()=>(handlemodal(shifts.id))}                
                     className="bg-green-500 border hover:bg-white hover:text-green-500 hover:border hover:border-green-500 text-white font-bold py-2 px-4 rounded"
                     >
@@ -233,7 +238,7 @@ export default function UserShifts() {
   
     {message ? 
     <div className={`bg-${color}-100 border border-${color}-400 text-${color}-700  px-4 py-3 rounded relative`}>
-    <p class="font-bold">{message}</p>
+    <p id = "message-pop" class="font-bold">{message}</p>
     </div>
      : null}
   </div>

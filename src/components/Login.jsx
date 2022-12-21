@@ -122,24 +122,14 @@ function Login() {
                     </label>
                 </div>
                 
-                {/* <div class="relative my-6">
-                <select id="usertype" class="border-blue-500 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:bg-white focus:border-blue-500">
-        
-                    <option value="Volunteer">volunteer</option>
-                    <option value="admin">admin</option>
-                    <option value="coordinator">coordinator</option>
-                </select>
-                </div> */}
-
-                {/* Error Message Class after this to embed react usestate */}
-                
                 {message ? 
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
                 <p class="font-bold">{message}</p> 
                 </div> : null}
 
                 <button class="shadow mt-3 bg-blue-700 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" 
-                 type="submit" >Login</button>
+                 type="submit" 
+                 id="login-button">Login</button>
                 
                     <div class="text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out mt-3">
                     <h2>New User? Click 

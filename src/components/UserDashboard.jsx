@@ -61,14 +61,17 @@ export default function UserDashboard() {
             <ul>
                 <li>    
                 <button className="my-10 w-full py-2 text-2x1 rounded font-semibold text-white hover:bg-blue-200 hover:text-blue-800" 
+                id="dashboard-button"
                 onClick={()=>swap(0)}>Dashboard</button>
                 </li>
                 <li>
                 <button className=" my-10 w-full py-2 text-2x1 rounded font-semibold text-white hover:bg-blue-200 hover:text-blue-800" 
+                id="profile-button"
                 onClick={()=>swap(1)} >Profile</button>
                 </li>
                 <li>
                 <button className="my-10 w-full py-2 text-2x1 rounded font-semibold text-white hover:bg-blue-200 hover:text-blue-800" 
+                id="shifts-button"
                 onClick={()=>swap(2)} >Shifts</button>
                 </li>
             </ul>

@@ -138,7 +138,7 @@ function Profile() {
             <div className='w-1/2 px-2'>
             <label
             className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
-            htmlFor='registername'>Name</label>
+            htmlFor='profilename'>Name</label>
             <input
             className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             // class=" border-indigo-500 px-5 py-1 text-gray-700 bg-gray-200 rounded"
@@ -147,13 +147,13 @@ function Profile() {
             value={profile.name}
             onChange={(e) => setProfile({ ...profile, name: e.target.value })}
             placeholder="Name"
-            id="registername"
+            id="profilename"
             required/>
             </div>
             <div className='w-1/2 px-2'>
             <label
             className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
-            htmlFor='registerphone'>Phone</label>
+            htmlFor='profilephone'>Phone</label>
             <input
             className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             // class=" border-indigo-500 px-5 py-1 text-gray-700 bg-gray-200 rounded"
@@ -162,7 +162,7 @@ function Profile() {
             placeholder="Phone"
             onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
             value={profile.phone}
-            id="registerphone"
+            id="profilephone"
             required/>
             </div>
 
@@ -193,13 +193,13 @@ function Profile() {
             <div className='w-full px-2'>
             <label 
             className="block uppercase tracking-wide text-blue-700 text-xs font-bold mt-2 mb-1"
-            htmlFor='address'>Address</label>
+            htmlFor='profileaddress'>Address</label>
             <input 
             className="appearance-none block w-full bg-gray-200 text-blue-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             type = "text" name="address"
             value = {profile.address}
             onChange={(e) => setProfile({ ...profile, address: e.target.value })}
-            placeholder="Address" id="address" required/>
+            placeholder="Address" id="profileaddress" required/>
             </div>
 
             <div className='w-1/4 px-2'>
