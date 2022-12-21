@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-// import { useEffect } from 'react';
 import cx from 'classnames';
 
 
@@ -12,8 +11,6 @@ function Testlogin() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('button clicked');
-
-    // Perform authentication here
   };
 
 

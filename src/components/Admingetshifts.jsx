@@ -2,7 +2,6 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import axios from 'axios';
 import { rooturl,loader } from '../config';
-// import { getValue } from '@testing-library/user-event/dist/utils';
 
 function Admingetshifts() {
 

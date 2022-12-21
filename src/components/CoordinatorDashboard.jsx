@@ -80,10 +80,6 @@ export default function CoordinatorDashboard() {
                 <button className="my-10 w-full py-2 text-2x1 rounded font-semibold text-white hover:bg-blue-200 hover:text-blue-800" 
                 onClick={()=>swapcoordinator(2)}>Active Shifts</button>
                 </li>
-                {/* <li>
-                <button className="my-10 w-full py-2 text-2x1 rounded font-semibold text-white hover:bg-blue-200 hover:text-blue-800"
-                onClick={()=>swapcoordinator(3)}>Profile</button>
-                </li> */}
             </ul>
             </div>
             </aside>

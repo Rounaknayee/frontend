@@ -16,35 +16,6 @@ function Coordinatorshifts() {
   const handleregisterforshift = async(id) => {
   }
 
-//   const handleregisterforshift = async(id) => {
-//     let response = await fetch(`${rooturl}/shifts/registershift/${id}`, {
-//       method: "POST",
-//       credentials: 'include',
-//       headers:{
-//           'x-access-token': localStorage.getItem('token'),
-//           }
-//         })
-
-//     console.log(response);
-//     let data = await response.json();
-//     console.log(data);
-
-//     if (response.status === 200) {
-//       // setData(data.filter(job => job.id !== id));
-//       setColor('bg-green-100 border border-green-400 text-green-700');
-//       setMessage("Registered for shift");
-//     }
-//     else if (response.status === 400 || response.status === 401 || response.status === 404) {
-//       setColor('bg-red-100 border border-red-400 text-red-700');
-//       setMessage(data.error);
-//     }
-//     else {
-//       console.log("error");
-//       setColor('bg-red-100 border border-red-400 text-red-700');
-//       setMessage(`Couldn't Register for shift ${id} error`);
-//     }
-//   }
-
   const fetchfromdb = async() => {
             let response = await fetch(`${rooturl}/coordinator/getshifts`, {
               method: "GET",
@@ -87,15 +58,11 @@ function Coordinatorshifts() {
     <div
     className='text-center text-2xl font-bold text-green-600 my-2'
     >Your Company's shifts</div>
-    {/* <div class="block w-40 h-25 p-6 bg-white border border-gray-200 rounded-lg shadow-md  dark:bg-gray-800 ">
-    </div> */}
 
     <div className="flex flex-row align-left my-2">
         <input 
         type="text"
         placeholder="Search"
-        // value={search}
-        // value = ''
         onChange={handlesearch}
         className="border border-blue-400 text-black-600  p-2"
         />
@@ -154,7 +121,6 @@ function Coordinatorshifts() {
                   <td className="border border-blue-400  w-1/12 p-2 ">{index}</td>
                   <td className="border border-blue-400  w-1/12 p-2">{shifts.start_time}</td>
                   <td className="border border-blue-400  w-1/12 p-2">{shifts.end_time}</td>
-                  {/* <td className="border border-blue-400  w-1/12 p-2">{shifts.max_volunteers}</td> */}
                   <td className="border border-blue-400  w-1/12 p-2">{shifts.work_type}</td>
                   <td className="border border-blue-400  w-1/12 p-2">{shifts.location}</td>
                   <td className="border border-blue-400  w-3/12 p-2">{shifts.description}</td>
@@ -162,9 +128,6 @@ function Coordinatorshifts() {
                     <button onClick={() => handleregisterforshift(shifts.id)}
                     className="bg-green-500 hover:bg-white hover:text-green-500 hover:border hover:border-green-500 text-white font-bold py-2 px-4 rounded"
                     >
-                      {/* <svg xmlns="http://www.w3.org/2000/svg"  fill="none" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                      </svg> */}
                       Register
                     </button>
                   </td>                    

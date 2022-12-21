@@ -5,10 +5,6 @@ import {useRef } from 'react';
 
 function Forgotpassword() {
   const formRef = useRef();
-
-  
-  // const [password, setPassword] = useState('');
-  // const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
   const [color, setColor] = useState('red');
   
@@ -49,14 +45,6 @@ function Forgotpassword() {
 
 
   }
-
-
-
-    // if (!(password === confirmPassword)) {
-
-
-
-
 
   return (
     <div >
@@ -109,10 +97,6 @@ function Forgotpassword() {
         </div>
         : null}
         </div>
-
-
-        
-
         </form>
 
 

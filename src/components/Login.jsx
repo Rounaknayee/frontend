@@ -28,8 +28,6 @@ function Login() {
 
     let handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log("entered submit");
-        // console.log(e)
         let data = new FormData(e.target);
         let rawdata = Object.fromEntries(data.entries());
         if (rawdata.remember === "on") {
@@ -39,7 +37,6 @@ function Login() {
             rawdata.remember = false;
         }
         console.log(rawdata);
-        // // check form data
 
         if(validatedata(rawdata,setMessage) === false) return;
         

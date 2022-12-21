@@ -10,15 +10,6 @@ import Navbar from "./Navbar"
 
 
 export default function UserDashboard() {
-    // Promise.all([checktoken()]).then((values) => {
-    //     console.log(values);
-    //     if(values[0] == false) {
-    //         window.location.href = "/login";
-    //     }
-    //     else{
-    //         console.log("user logged in");
-    //     }
-    // });
     
     useEffect(() => {
         if(localStorage.getItem('user_type')!=='volunteer'){

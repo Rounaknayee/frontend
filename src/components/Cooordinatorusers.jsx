@@ -2,41 +2,18 @@ import React from 'react'
 
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { loader,rooturl} from "../config";
+import { rooturl} from "../config";
 
 
 function Cooordinatorusers() {
 
-
-    // const[]
     const [data, setData] = useState([]);
     const [message, setMessage] = useState('');
-    // const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
     const [color, setColor] = useState('red');
     var qdata = '';
     const handlesearch = (e) => {
     }
-  
-    // const handlesearch = (e) => {
-    //   setSearch(e.target.value);
-    //   console.log(search);
-    //   console.log("Ye hai actual data")
-    //   console.log(data)
-    //   console.log("Ye hai Query Data")
-    //   console.log(qdata)
-    //   qdata = data
-    //   var filtered = qdata.filter(
-    //     shift =>
-    //       shift.description.toLowerCase().includes(search.toLocaleLowerCase()) ||
-    //       shift.location.toLowerCase().includes(search.toLocaleLowerCase()) ||
-    //       shift.work_type.toLowerCase().includes(search.toLocaleLowerCase())
-    //     // shift.max_volunteers.includes(search.toLocaleLowerCase())||
-    //     // shift.start_time.includes(search.toLocaleLowerCase()) ||
-    //     // shift.end_time.includes(search.toLocaleLowerCase())
-    //   );
-    //   setData(filtered);
-    // }
     
     const handledeleteuser = async(id) => {
       let response = await fetch(`${rooturl}/coordinator/deleteuser/${id}`, {
@@ -109,15 +86,11 @@ function Cooordinatorusers() {
       <div
       className='text-center text-2xl font-bold text-green-600 my-2'
       >Our Users</div>
-      {/* <div class="block w-40 h-25 p-6 bg-white border border-gray-200 rounded-lg shadow-md  dark:bg-gray-800 ">
-      </div> */}
   
       <div className="flex flex-row align-left my-2">
           <input 
           type="text"
           placeholder="Search"
-          // value={search}
-          // value = ''
           onChange={handlesearch}
           className="border border-blue-400 text-black-600  p-2"
           />

@@ -1,48 +1,41 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-
-
 import { rooturl } from '../config'
 
 function Modal({ show, onClose, onRegister }) {
   return (
       <div id="defaultModal" style={{ display: show ? 'block' : 'none' }}
-                      data-modal-show="true"
-                      tabIndex="-1" aria-hidden="true" class="fixed top-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-                          <div class="relative w-full h-full max-w-2xl md:h-auto">
-                              {/* <!-- Modal content --> */}
-                              <div class="relative bg-white rounded-lg shadow ">
-                                  {/* <!-- Modal header --> */}
-                                  <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                                      <h3 class="text-xl font-semibold text-gray-900">
-                                          Disclaimer
-                                      </h3>
-                                      <button 
-                                      onClick={onClose}
-                                      type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
-                                          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                          <span class="sr-only">Close modal</span>
-                                      </button>
-                                  </div>
-                                  {/* <!-- Modal body --> */}
-                                  <div class="p-6 space-y-6">
-                                      <p class="text-base leading-relaxed text-gray-500 justify">
-                                      As a volunteer, you are not an employee of the organization and are not entitled to the same protections and benefits as employees. You are volunteering your time and services to the organization on a voluntary basis and are not entitled to compensation for your time or services. You are also not covered by the organization's insurance policies, and you are responsible for your own personal safety and well-being while volunteering. By volunteering, you agree to indemnify and hold the organization and its employees, officers, and directors harmless from any and all claims, damages, or expenses that may arise from your volunteer activities. Please be aware of any potential risks associated with your volunteer activities and take appropriate precautions to protect your own safety and well-being.
-                                      </p>
-                                      
-                                  </div>
-                                  {/* <!-- Modal footer --> */}
-                                  <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                      <button 
-                                      onClick={onRegister}
-                                      data-modal-toggle="defaultModal" type="button" class="text-bold text-white border bg-green-500 hover:bg-white hover:text-green-500 hover:border hover:border-green-500 text-sm font-medium px-5 py-2.5  focus:z-10 rounded-lg">Accept & Register</button>
-                                      <button 
-                                      onClick={onClose}
-                                      data-modal-toggle="defaultModal" type="button" class="text-bold text-white border bg-red-500 hover:bg-white hover:text-red-500 hover:border hover:border-red-500 text-sm font-medium px-5 py-2.5  focus:z-10 rounded-lg ">Decline</button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div> 
+        data-modal-show="true"
+        tabIndex="-1" aria-hidden="true" class="fixed top-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+            <div class="relative w-full h-full max-w-2xl md:h-auto">
+                <div class="relative bg-white rounded-lg shadow ">
+                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-xl font-semibold text-gray-900">
+                            Disclaimer
+                        </h3>
+                        <button 
+                        onClick={onClose}
+                        type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <p class="text-base leading-relaxed text-gray-500 justify">
+                        As a volunteer, you are not an employee of the organization and are not entitled to the same protections and benefits as employees. You are volunteering your time and services to the organization on a voluntary basis and are not entitled to compensation for your time or services. You are also not covered by the organization's insurance policies, and you are responsible for your own personal safety and well-being while volunteering. By volunteering, you agree to indemnify and hold the organization and its employees, officers, and directors harmless from any and all claims, damages, or expenses that may arise from your volunteer activities. Please be aware of any potential risks associated with your volunteer activities and take appropriate precautions to protect your own safety and well-being.
+                        </p>
+                    </div>
+                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button 
+                        onClick={onRegister}
+                        data-modal-toggle="defaultModal" type="button" class="text-bold text-white border bg-green-500 hover:bg-white hover:text-green-500 hover:border hover:border-green-500 text-sm font-medium px-5 py-2.5  focus:z-10 rounded-lg">Accept & Register</button>
+                        <button 
+                        onClick={onClose}
+                        data-modal-toggle="defaultModal" type="button" class="text-bold text-white border bg-red-500 hover:bg-white hover:text-red-500 hover:border hover:border-red-500 text-sm font-medium px-5 py-2.5  focus:z-10 rounded-lg ">Decline</button>
+                    </div>
+                </div>
+            </div>
+        </div> 
   );
 }
 
@@ -213,17 +206,11 @@ export default function UserShifts() {
                     <button 
                     type="button" data-modal-toggle="defaultModal" 
                     onClick = {()=>(handlemodal(shifts.id))}                
-                    // onClick={() => handleregisterforshift(shifts.id)}
                     className="bg-green-500 border hover:bg-white hover:text-green-500 hover:border hover:border-green-500 text-white font-bold py-2 px-4 rounded"
                     >
                       Register
                     </button>
-                  </td>  
-
-                  
-
-                  {/* <!-- Main modal --> */}
-                                      
+                  </td>                                       
                 </tr>
               )
           })

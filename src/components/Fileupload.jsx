@@ -12,8 +12,6 @@ function Fileupload({urlname}) {
     const [loading, setLoading] = useState();
     const fileuploadinput = useRef();
 
-
-// const [file, setFile] = React.useState(null);
     let fileupload = async(e)=>{
         // fileuploadinput.current.disabled = true;
         setLoading(true);
@@ -93,8 +91,6 @@ function Fileupload({urlname}) {
     }
   return (
     <div>
-
-        {/* <input type="file" onChange={(e) => setFile(e.target.files[0])} />  ref={fileuploadinput}  */  }
         <div
         className='text-center text-2xl font-bold text-green-600 mb-5'
         >Upload Files Here!</div>

@@ -31,27 +31,19 @@ export default function Register() {
 
     let handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log(e.target);
-        // Get the form Data
         let data = new FormData(e.target);
         let rawdata = Object.fromEntries(data.entries());
         if(rawdata.marketing === "true")  rawdata.marketing = true;
         else rawdata.marketing = false;
-        
-        // console.log(rawdata);
-        // Validate the passwords and age, if True then set message of errror
 
         if(validatedata(rawdata,setMessage) === true) return;
         delete rawdata.confirmregisterpassword;
         setMessage("Registering....");
         try {
-            // Actual call to API starts here
             console.log("Calling API");
             console.log(JSON.stringify(rawdata));
 
             let res = await fetch(register_api ,  {
-            // credentials: 'include',
-            // mode: 'no-cors',
               method: "POST",
               body: JSON.stringify(rawdata),
               headers:{
@@ -70,11 +62,6 @@ export default function Register() {
             }
             else if(res.status === 401) {
                 let resJson = await res.json();
-                // let str1 = resJson.message+"\n";
-                // let  str2 = resJson.errors;
-                // for (const [key, value] of Object.entries(str2)) {
-                //     str1 += key + " : " + value + "\n";
-                // }             
                 setMessage(String(resJson.error));
 
             }
@@ -93,7 +80,6 @@ export default function Register() {
         }  
         catch(err){
             console.log(err);
-            // setMessage(err);
         }
 
     }

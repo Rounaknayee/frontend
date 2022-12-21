@@ -70,49 +70,6 @@ function Profile() {
             console.log("error");
             setMessage("Error updating profile");
         }
-            
-
-
-
-        // let response = await axios({
-        //     method: 'post',
-        //     url: `${rooturl}/users/updateprofile`,
-        //     withCredentials: true,
-        //     headers: {
-        //         'x-access-token': localStorage.getItem('token'),
-        //     },
-        //     data: rawdata
-        // }).then((response) => {
-        //     console.log(response);
-        //     if (response.status === 200) {
-        //         setColor("green");
-        //         let userdata = response.data;
-        //         console.log(userdata);
-        //         setProfile(userdata);
-        //         setMessage("Profile updated");
-        //     }
-        //     else if ( response.status === 401 ) {
-        //         console.log("Entered 401")
-        //         let userdata = response.data;
-        //         setColor("red");
-        //         setMessage(userdata.error);
-        //     }
-        //     else if (response.status === 422){
-        //         console.log("Entered 422")
-        //         let userdata = response.data;
-        //         setColor("red");
-        //         setMessage(userdata.error);
-        //     }
-        //     else {
-        //         console.log("Entered else")
-        //         setColor("red");
-        //         setMessage("Error updating profile");
-        //     }
-        // }).catch((error) => {
-        //     console.log(error)
-            
-        // })
-
     }  
 
 
@@ -355,9 +312,7 @@ function Profile() {
     </form>
     
     </div>
-    {/* <div className="flex flex-wrap"> */}
         <Forgotpassword />
-    {/* </div> */}
     </>
     
   )

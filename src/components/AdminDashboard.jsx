@@ -89,13 +89,6 @@ export default function AdminDashboard() {
                 {Component}
             </div>
         </div>
-        
-
-
-
-        {/* <Fileupload /> */}
-
-              
 
         </div>
     );

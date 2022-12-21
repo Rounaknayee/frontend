@@ -137,7 +137,6 @@ export default function UserDash() {
       </thead>
       <tbody>
         { jobs.length > 0 ? (
-          // const index = data.findIndex(job => job.id === id);
           jobs.filter(
             jobs =>
             jobs.work_type.toLowerCase().includes(search.toLowerCase()) ||
@@ -148,7 +147,6 @@ export default function UserDash() {
             jobs.max_volunteers.toString().includes(search.toLowerCase())
 
           ).map((shifts) => {
-              // const {id, start_time, end_time, max_volunteers, work_type, location, description} = job;
               return (
                 <tr>
                     <td
