@@ -1,4 +1,6 @@
-export const rooturl =  process.env.WEBSITE_URL || "http://192.168.6.153:8000" || "http://localhost:8000";
+
+
+export const rooturl =  process.env.REACT_APP_WEBSITE_URL;
 
 export function checktoken (){
     let token = localStorage.getItem('token');
