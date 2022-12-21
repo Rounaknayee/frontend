@@ -1,4 +1,4 @@
-import { stringify } from 'postcss';
+
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -15,18 +15,6 @@ export default function UserDash() {
   const handlesearch = (e) => {
     setSearch(e);
     console.log(search);
-    
-    var filtered = jobs.filter(
-      shift =>
-        shift.description.toLowerCase().includes(search.toLocaleLowerCase()) ||
-        shift.location.toLowerCase().includes(search.toLocaleLowerCase()) ||
-        shift.work_type.toLowerCase().includes(search.toLocaleLowerCase())
-      // shift.max_volunteers.includes(search.toLocaleLowerCase())||
-
-      // shift.start_time.includes(search.toLocaleLowerCase()) ||
-      // shift.end_time.includes(search.toLocaleLowerCase())
-    );
-    setJobs(filtered);
   }
   
   const handledeletejob = async(id) => {
@@ -95,16 +83,15 @@ export default function UserDash() {
 
   return (
     <div >
-    <div>welcome to your Dashboard</div>
-    <div class="block w-40 h-25 p-6 bg-white border border-gray-200 rounded-lg shadow-md  dark:bg-gray-800 ">
-    </div>
+    
+    
     <div className="flex flex-row align-left my-2">
         <input 
         type="text"
-        placeholder="Search"
+        placeholder="Search Here"
         value={search}
-        onChange={e => handlesearch(e.target.value)}
-        className="border border-blue-400 text-black-600  p-2"
+        onChange={handlesearch}
+        className="border border-blue-400 text-black-600 w-full p-2"
         />
         <button
         className="bg-blue-600 text-white ml-5 p-2 rounded hover:bg-blue-700"
@@ -151,7 +138,16 @@ export default function UserDash() {
       <tbody>
         { jobs.length > 0 ? (
           // const index = data.findIndex(job => job.id === id);
-          jobs.map((shifts) => {
+          jobs.filter(
+            jobs =>
+            jobs.work_type.toLowerCase().includes(search.toLowerCase()) ||
+            jobs.location.toLowerCase().includes(search.toLowerCase()) ||
+            jobs.description.toLowerCase().includes(search.toLowerCase()) ||
+            jobs.start_time.toString().includes(search.toLowerCase()) ||
+            jobs.end_time.toString().includes(search.toLowerCase())||
+            jobs.max_volunteers.toString().includes(search.toLowerCase())
+
+          ).map((shifts) => {
               // const {id, start_time, end_time, max_volunteers, work_type, location, description} = job;
               return (
                 <tr>
@@ -186,13 +182,16 @@ export default function UserDash() {
                     <td
                     className="border border-blue-400  w-1/12 p-2"
                     >
+                      
                     <button 
-                    className="bg-red-500 hover:bg-white hover:text-red-500 hover:border hover:border-red-500 text-white font-bold py-2 px-4 rounded"
+                    className="bg-red-500 border hover:bg-white hover:text-red-500 hover:border hover:border-red-500 text-white font py-2 px-4 rounded"
                     onClick={() => handledeletejob(shifts.id)}> 
                     Drop Job 
                     </button>
                     </td> 
                   </tr>
+
+
               )
           })
       ) : (

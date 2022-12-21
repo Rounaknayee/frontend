@@ -291,11 +291,12 @@ export default function Register() {
             type="submit" id="formsubmitbutton" >Register Me</button>
             </div>
             </div>
-
+            <div className='p-5'>
             {message ? 
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
             <p class="font-bold">{message}</p> 
             </div> : null}
+            </div>
             
             <div class="px-2 text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out ">
                  <Link to='/login'>Already a User? Click <u>Here</u> to Login</Link> </div>

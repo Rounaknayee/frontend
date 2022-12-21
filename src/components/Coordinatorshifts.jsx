@@ -1,36 +1,17 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
-import { loader,rooturl} from "../config";
+import { rooturl} from "../config";
 
 
 function Coordinatorshifts() {
 
-    // const[]
   const [data, setData] = useState([]);
   const [message, setMessage] = useState('');
-  // const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [color, setColor] = useState('red');
-  var qdata = '';
 
   const handlesearch = (e) => {
     setSearch(e.target.value);
-    console.log(search);
-    console.log("Ye hai actual data")
-    console.log(data)
-    console.log("Ye hai Query Data")
-    console.log(qdata)
-    qdata = data
-    var filtered = qdata.filter(
-      shift =>
-        shift.description.toLowerCase().includes(search.toLocaleLowerCase()) ||
-        shift.location.toLowerCase().includes(search.toLocaleLowerCase()) ||
-        shift.work_type.toLowerCase().includes(search.toLocaleLowerCase())
-      // shift.max_volunteers.includes(search.toLocaleLowerCase())||
-      // shift.start_time.includes(search.toLocaleLowerCase()) ||
-      // shift.end_time.includes(search.toLocaleLowerCase())
-    );
-    setData(filtered);
   }
   const handleregisterforshift = async(id) => {
   }
@@ -65,7 +46,7 @@ function Coordinatorshifts() {
 //   }
 
   const fetchfromdb = async() => {
-            let response = await fetch(`${rooturl}/shifts/getshifts`, {
+            let response = await fetch(`${rooturl}/coordinator/getshifts`, {
               method: "GET",
               credentials: 'include',
                     headers:{
@@ -81,13 +62,12 @@ function Coordinatorshifts() {
             
 
             if (response.status === 200 && data.length > 0) {
-              console.log("Data set krdiya")
-              
+              setColor('green');              
               setData(data);
             }
 
             else if (response.status === 200 && data.length === 0) {
-              console.log("Server se kuch nhi mila")
+              
               setData([]);
               setMessage("No shifts assigned to user yet!");
 
@@ -141,10 +121,6 @@ function Coordinatorshifts() {
                 className="border border-blue-400  w-1/12 p-2"
                 >End Time</th>
 
-                {/* <th
-                className="border border-blue-400  w-1/12 p-2"
-                >Max Volunteers</th> */}
-
                 <th
                 className="border border-blue-400  w-1/12 p-2"
                 >Work Type</th>
@@ -165,7 +141,11 @@ function Coordinatorshifts() {
       <tbody>
         { data.length > 0 ? (
           
-          data.map((shifts) => {
+          data.filter(
+            shifts => 
+              shifts.start_time.toString().includes(search.toLowerCase()) || shifts.end_time.toString().includes(search.toLowerCase()) || shifts.work_type.toLowerCase().includes(search.toLowerCase()) || shifts.location.toLowerCase().includes(search.toLowerCase()) || shifts.description.toLowerCase().includes(search.toLowerCase())
+            
+          ).map((shifts) => {
               const index = data.indexOf(shifts)+1;
               return (
                 <tr 

@@ -9,26 +9,13 @@ function Admingetshifts() {
     const [shifts, setShifts] = useState([]);
     const [loading, setLoading] = useState(true);
     // const [error, setError] = useState(null);
+    const [color, setColor] = useState('red');
     const [message, setMessage] = useState('');
     const [search, setSearch] = useState('');
 
-    const data = '';
-
     const handlesearch = (e) => {
+        console.log(e.target.value);
         setSearch(e.target.value);
-        console.log(search);
-        console.log(shifts)
-        var filtered = data.filter(
-            shift =>
-                shift.description.toLowerCase().includes(search.toLocaleLowerCase()) ||
-                shift.location.toLowerCase().includes(search.toLocaleLowerCase()) ||
-                shift.work_type.toLowerCase().includes(search.toLocaleLowerCase()) 
-                // shift.max_volunteers.includes(search.toLocaleLowerCase())||
-                // shift.start_time.includes(search.toLocaleLowerCase()) ||
-                // shift.end_time.includes(search.toLocaleLowerCase())
-        );
-
-        setShifts(filtered);
     }
 
     // const data = {
@@ -47,11 +34,8 @@ function Admingetshifts() {
                     }
                 
             })
-            // setShifts(response.data);
-            // console.log(response);
-            // console.log("raw data");
-            const data = response.data.shifts
 
+            const data = response.data.shifts;
             console.log(data);
             // console.log("processed data")
 
@@ -80,7 +64,6 @@ function Admingetshifts() {
     useEffect(() => {
         fetchShifts();
     }, []);
-    // if(loading) return(loader)
 
     const handledeleteshift = async(id) => {
         try{
@@ -95,6 +78,8 @@ function Admingetshifts() {
             console.log(response);
             if (response.status === 200) {
                 setShifts(shifts.filter(shift => shift.id !== id));
+                setColor('green');
+                setMessage("Shift Deleted Successfully");
                 }
             else if(response.status === 401){
 
@@ -114,7 +99,8 @@ function Admingetshifts() {
   return (
     <div>
     {loading? loader:(<>
-    <div>Admin Get shifts</div>
+    <div className='text-center text-2xl font-bold text-green-600 my-2'>
+        Shifts </div>
     <div className="flex flex-row align-left my-2">
         <input 
         type="text"
@@ -167,8 +153,17 @@ function Admingetshifts() {
           </tr>
       </thead>
         <tbody>
-            {shifts.length > 0 ?
-            shifts.map((shift) => (
+            {shifts.length > 0 ?(
+            shifts.filter(shift =>
+                shift.description.toLowerCase().includes(search.toLocaleLowerCase()) ||
+                shift.location.toLowerCase().includes(search.toLocaleLowerCase()) ||
+                shift.work_type.toLowerCase().includes(search.toLocaleLowerCase()) ||
+                shift.start_time.toString().includes(search.toLocaleLowerCase()) ||
+                shift.end_time.toString().includes(search.toLocaleLowerCase()) ||
+                shift.max_volunteers.toString().includes(search.toLocaleLowerCase()) 
+                ).map((shift) => (
+                    
+                    
                 <>
                 <tr
                 className='border border-blue-400  w-full align-center'
@@ -178,7 +173,7 @@ function Admingetshifts() {
                     >{shift.id}</td>
                     <td
                     className='w-1/12 p-2 text-center'
-                    >{shift.start_time}</td>
+                    >{shift.start_time}{ console.log(shift)}</td>
                     <td
                     className='w-1/12 p-2   text-center'
                     >{shift.end_time}</td>
@@ -204,7 +199,7 @@ function Admingetshifts() {
                     </button></td>
                 </tr>
                 </>
-            ))
+            )))
             :
             <tr >
                 <td colspan = {6}>No shifts assigned to user yet!</td>
@@ -216,7 +211,7 @@ function Admingetshifts() {
     </>)}
 
     {message ? 
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+    <div className={`bg-${color}-100 border border-${color}-400 text-${color}-700  px-4 py-3 rounded relative`}>
     <p class="font-bold">{message}</p> 
     </div> : null}
 

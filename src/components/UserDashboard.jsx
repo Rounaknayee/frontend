@@ -78,7 +78,7 @@ export default function UserDashboard() {
                 </li>
                 <li>
                 <button className="my-10 w-full py-2 text-2x1 rounded font-semibold text-white hover:bg-blue-200 hover:text-blue-800" 
-                onClick={()=>swap(2)} >shifts</button>
+                onClick={()=>swap(2)} >Shifts</button>
                 </li>
             </ul>
             </div>

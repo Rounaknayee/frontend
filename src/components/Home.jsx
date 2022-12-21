@@ -51,7 +51,7 @@ function Home() {
             <div className="flex justify-between w-64">
 
             <Link to='/register'>
-            <button type="button" class="text-white bg-gradient-to-tr from-green-600 to-blue-600 hover:bg-white font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+            <button type="button" class="text-white bg-gradient-to-tr from-green-600 to-blue-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
             Register
             </button>
             </Link>
