@@ -147,7 +147,7 @@ function Cooordinatorusers() {
                 <td className="border border-blue-400  w-2/12 p-2">{city}</td>
                 <td className="border border-blue-400  w-2/12 p-2">
                     <button onClick={() => handledeleteuser(id)}
-                    className="bg-red-500 hover:bg-white hover:text-red-500 hover:border hover:border-red-500 text-white font-bold py-2 px-4 rounded"
+                    className="border bg-red-500 hover:bg-white hover:text-red-500 hover:border hover:border-red-500 text-white font-bold py-2 px-4 rounded"
                     >
                     Delete User
                     </button>

@@ -14,39 +14,67 @@ function Coordinatorshifts() {
     setSearch(e.target.value);
   }
   const handleregisterforshift = async(id) => {
+    try{
+      let response = await fetch(`${rooturl}/coordinator/groupregister/${id}`, {
+        method: "POST",
+        credentials: 'include',
+        headers:{
+            'x-access-token': localStorage.getItem('token'),
+            }
+        })
+      console.log(response);
+      let res = await response.json();
+      console.log(res);
+      if (response.status === 200) {
+        setColor("green");
+        setMessage("Registered for shift");
+      }
+      else if (response.status === 400 || response.status === 401 || response.status === 404) {
+        setColor("red");
+        setMessage(res.error);
+      }
+      else {
+        setColor("red");
+        console.log("error");
+        setMessage("Error registering for shift");
+      }
+    }catch(e){
+      console.log(e);
+    }
   }
 
   const fetchfromdb = async() => {
-            let response = await fetch(`${rooturl}/coordinator/getshifts`, {
-              method: "GET",
-              credentials: 'include',
-                    headers:{
-                        'x-access-token': localStorage.getItem('token'),
-                        }
-              })
-            
-            // console.log(response);
-            let data = await response.json();
-            data = data.shifts
-            console.log(data);
-            console.log("server se mila hua data upar hai")
-            
+    let response = await fetch(`${rooturl}/coordinator/getshifts`, {
+      method: "GET",
+      credentials: 'include',
+            headers:{
+                'x-access-token': localStorage.getItem('token'),
+                }
+      })
+      
+    let data = await response.json();
+    data = data.shifts
+    console.log(data);
+    console.log("server se mila hua data upar hai")
+    
 
-            if (response.status === 200 && data.length > 0) {
-              setColor('green');              
-              setData(data);
-            }
+    if (response.status === 200 && data.length > 0) {
+      setColor('green');              
+      setData(data);
+    }
 
-            else if (response.status === 200 && data.length === 0) {
-              
-              setData([]);
-              setMessage("No shifts assigned to user yet!");
+    else if (response.status === 200 && data.length === 0) {
+      setColor('red');
+      
+      setData([]);
+      setMessage("No shifts assigned to user yet!");
 
-            }
-            else {
-              console.log("error");
-              setMessage("error");
-            }
+    }
+    else {
+      setColor('red');
+      console.log("error");
+      setMessage("error");
+    }
   }
 
   useEffect(() => {
@@ -57,12 +85,12 @@ function Coordinatorshifts() {
     <div>
     <div
     className='text-center text-2xl font-bold text-green-600 my-2'
-    >Your Company's shifts</div>
+    >Group Registration</div>
 
     <div className="flex flex-row align-left my-2">
         <input 
         type="text"
-        placeholder="Search"
+        placeholder="Search Here ..."
         onChange={handlesearch}
         className="border border-blue-400 text-black-600  p-2"
         />
@@ -76,70 +104,77 @@ function Coordinatorshifts() {
     <table class="table-auto my-4">
       <thead>
       <tr>
-                <th
-                className="border border-blue-400  w-1/12 p-2"
-                >Shift ID</th>
+        <th
+        className="border border-blue-400  w-1/12 p-2"
+        >Shift ID</th>
 
-                <th
-                className="border border-blue-400  w-1/12 p-2"
-                >Start Time</th>
+        <th
+        className="border border-blue-400  w-1/12 p-2"
+        >Date</th>
 
-                <th
-                className="border border-blue-400  w-1/12 p-2"
-                >End Time</th>
+        <th
+        className="border border-blue-400  w-1/12 p-2"
+        >Start Time</th>
 
-                <th
-                className="border border-blue-400  w-1/12 p-2"
-                >Work Type</th>
+        <th
+        className="border border-blue-400  w-1/12 p-2"
+        >End Time</th>
 
-                <th
-                className="border border-blue-400  w-1/12 p-2"
-                >Location</th>
+        <th
+        className="border border-blue-400  w-1/12 p-2"
+        >Work Type</th>
 
-                <th
-                className="border border-blue-400  w-3/12 p-2"
-                >Description</th>
+        <th
+        className="border border-blue-400  w-1/12 p-2"
+        >Location</th>
 
-                <th
-                className="border border-blue-400  w-1/12 p-2"
-                >Register for shift</th>     
-          </tr>
+        <th
+        className="border border-blue-400  w-2/12 p-2"
+        >Description</th>
+
+        <th
+        className="border border-blue-400  w-1/12 p-2"
+        >Register for shift</th>     
+      </tr>
       </thead>
       <tbody>
         { data.length > 0 ? (
-          
           data.filter(
             shifts => 
-              shifts.start_time.toString().includes(search.toLowerCase()) || shifts.end_time.toString().includes(search.toLowerCase()) || shifts.work_type.toLowerCase().includes(search.toLowerCase()) || shifts.location.toLowerCase().includes(search.toLowerCase()) || shifts.description.toLowerCase().includes(search.toLowerCase())
-            
+              shifts.start_time.toString().includes(search.toLowerCase()) || 
+              shifts.date.toString().includes(search.toLowerCase()) || 
+              shifts.end_time.toString().includes(search.toLowerCase()) || 
+              shifts.work_type.toLowerCase().includes(search.toLowerCase()) || 
+              shifts.location.toLowerCase().includes(search.toLowerCase()) || 
+              shifts.description.toLowerCase().includes(search.toLowerCase()) 
           ).map((shifts) => {
               const index = data.indexOf(shifts)+1;
-              return (
-                <tr 
-                className='align-center text-center ' id = {shifts.id}
-                >
-                  <td className="border border-blue-400  w-1/12 p-2 ">{index}</td>
-                  <td className="border border-blue-400  w-1/12 p-2">{shifts.start_time}</td>
-                  <td className="border border-blue-400  w-1/12 p-2">{shifts.end_time}</td>
-                  <td className="border border-blue-400  w-1/12 p-2">{shifts.work_type}</td>
-                  <td className="border border-blue-400  w-1/12 p-2">{shifts.location}</td>
-                  <td className="border border-blue-400  w-3/12 p-2">{shifts.description}</td>
-                  <td className="border border-blue-400  w-1/12 p-2">
-                    <button onClick={() => handleregisterforshift(shifts.id)}
-                    className="bg-green-500 hover:bg-white hover:text-green-500 hover:border hover:border-green-500 text-white font-bold py-2 px-4 rounded"
-                    >
-                      Register
-                    </button>
-                  </td>                    
-                </tr>
-              )
-          })
-      ) : (
-        <tr>
-          <td colSpan={6}>No shift Available!</td>
-        </tr>
-      )   
-      }
+            return (
+              <tr 
+              className='align-center text-center ' id = {shifts.id}
+              >
+                <td className="border border-blue-400  w-1/12 p-2 ">{index}</td>
+                <td className="border border-blue-400  w-1/12 p-2">{shifts.date}</td>
+                <td className="border border-blue-400  w-1/12 p-2">{shifts.start_time}</td>
+                <td className="border border-blue-400  w-1/12 p-2">{shifts.end_time}</td>
+                <td className="border border-blue-400  w-1/12 p-2">{shifts.work_type}</td>
+                <td className="border border-blue-400  w-1/12 p-2">{shifts.location}</td>
+                <td className="border border-blue-400  w-3/12 p-2">{shifts.description}</td>
+                <td className="border border-blue-400  w-1/12 p-2">
+                  <button onClick={() => handleregisterforshift(shifts.id)}
+                  className="border bg-green-500 hover:bg-white hover:text-green-500 hover:border hover:border-green-500 text-white font-bold py-2 px-4 rounded">
+                    Register
+                  </button>
+                </td>                    
+              </tr>
+            )
+        })
+        ) : (
+          <tr>
+            <td colSpan={6}>No shift Available!</td>
+          </tr>
+        )   
+        }
       </tbody>
   </table>
   

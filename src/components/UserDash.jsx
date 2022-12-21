@@ -108,6 +108,10 @@ export default function UserDash() {
 
                 <th
                 className="border border-blue-400  w-1/12 p-2"
+                >Date</th>
+
+                <th
+                className="border border-blue-400  w-1/12 p-2"
                 >Start Time</th>
 
                 <th
@@ -141,6 +145,7 @@ export default function UserDash() {
             jobs =>
             jobs.work_type.toLowerCase().includes(search.toLowerCase()) ||
             jobs.location.toLowerCase().includes(search.toLowerCase()) ||
+            jobs.date.toString().includes(search.toLowerCase()) ||
             jobs.description.toLowerCase().includes(search.toLowerCase()) ||
             jobs.start_time.toString().includes(search.toLowerCase()) ||
             jobs.end_time.toString().includes(search.toLowerCase())||
@@ -152,6 +157,10 @@ export default function UserDash() {
                     <td
                     className="border border-blue-400  w-1/12 p-2"
                     >{shifts.id}</td>
+
+                    <td
+                    className="border border-blue-400  w-1/12 p-2"
+                    >{shifts.date}</td>
 
                     <td
                     className="border border-blue-400  w-1/12 p-2"

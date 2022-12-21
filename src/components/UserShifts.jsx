@@ -158,6 +158,10 @@ export default function UserShifts() {
 
                 <th
                 className="border border-blue-400  w-1/12 p-2"
+                >Date</th>
+
+                <th
+                className="border border-blue-400  w-1/12 p-2"
                 >Start Time</th>
 
                 <th
@@ -187,6 +191,7 @@ export default function UserShifts() {
             data => 
             data.start_time.toString().includes(search.toLocaleLowerCase()) ||
             data.end_time.toString().includes(search.toLocaleLowerCase()) ||
+            data.date.toString().includes(search.toLocaleLowerCase()) ||
             data.work_type.toLowerCase().includes(search.toLocaleLowerCase()) ||
             data.location.toLowerCase().includes(search.toLocaleLowerCase()) ||
             data.description.toLowerCase().includes(search.toLocaleLowerCase())
@@ -197,6 +202,7 @@ export default function UserShifts() {
                 className='align-center text-center ' id = {shifts.id}
                 >
                   <td className="border border-blue-400  w-1/12 p-2 ">{index}</td>
+                  <td className="border border-blue-400  w-1/12 p-2">{shifts.date}</td>
                   <td className="border border-blue-400  w-1/12 p-2">{shifts.start_time}</td>
                   <td className="border border-blue-400  w-1/12 p-2">{shifts.end_time}</td>
                   <td className="border border-blue-400  w-1/12 p-2">{shifts.work_type}</td>
