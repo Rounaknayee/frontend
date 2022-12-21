@@ -13,7 +13,7 @@ export default function UserDash() {
   const [search, setSearch] = useState('');
 
   const handlesearch = (e) => {
-    setSearch(e);
+    setSearch(e.target.value);
     console.log(search);
   }
   
@@ -89,7 +89,7 @@ export default function UserDash() {
         <input 
         type="text"
         placeholder="Search Here"
-        value={search}
+        // value={search}
         onChange={handlesearch}
         className="border border-blue-400 text-black-600 w-full p-2"
         />
@@ -143,13 +143,14 @@ export default function UserDash() {
         { jobs.length > 0 ? (
           jobs.filter(
             jobs =>
-            jobs.work_type.toLowerCase().includes(search.toLowerCase()) ||
-            jobs.location.toLowerCase().includes(search.toLowerCase()) ||
-            jobs.date.toString().includes(search.toLowerCase()) ||
-            jobs.description.toLowerCase().includes(search.toLowerCase()) ||
-            jobs.start_time.toString().includes(search.toLowerCase()) ||
-            jobs.end_time.toString().includes(search.toLowerCase())||
-            jobs.max_volunteers.toString().includes(search.toLowerCase())
+            
+            jobs.work_type.toLowerCase().includes(search.toLocaleLowerCase()) ||
+            jobs.location.toLowerCase().includes(search.toLocaleLowerCase()) ||
+            jobs.date.toString().includes(search.toLocaleLowerCase()) ||
+            jobs.description.toLowerCase().includes(search.toLocaleLowerCase()) ||
+            jobs.start_time.toString().includes(search.toLocaleLowerCase()) ||
+            jobs.end_time.toString().includes(search.toLocaleLowerCase())||
+            jobs.max_volunteers.toString().includes(search.toLocaleLowerCase())
 
           ).map((shifts) => {
               return (
