@@ -285,7 +285,7 @@ export default function Register() {
             </div>
             
             <div class="px-2 text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out ">
-                 <Link to='/login'>Already a User? Click <u>Here</u> to Login</Link> </div>
+                 <Link to='/login'>Already a User? Click <u id="register-login">Here</u> to Login</Link> </div>
 
         </form>
         

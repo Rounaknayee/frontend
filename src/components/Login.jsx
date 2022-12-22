@@ -133,7 +133,7 @@ function Login() {
                 
                     <div class="text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out mt-3">
                     <h2>New User? Click 
-                        <Link to='/register'> <u>Here</u> </Link> 
+                        <Link to='/register'> <u id = "login-register">Here</u> </Link> 
                         to register</h2>
                     </div> 
                     

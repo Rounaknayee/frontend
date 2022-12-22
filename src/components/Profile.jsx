@@ -302,7 +302,7 @@ function Profile() {
 
             {message ? 
             <div className={`bg-${color}-100 border border-${color}-400 text-${color}-700  px-4 py-3 rounded relative text-center`}>
-            <p class="font-bold">{message}</p>
+            <div id="profile-message" class="font-bold" >{message}</div>
             </div>
             : null}
             </div>
