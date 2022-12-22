@@ -93,7 +93,7 @@ function Forgotpassword() {
         <div className='w-full px-2 my-3'>
         {message ? 
         <div className={`bg-${color}-100 border border-${color}-400 text-${color}-700  px-4 py-3 rounded relative text-center`}>
-        <p class="font-bold">{message}</p>
+        <p class="font-bold" id="password-message">{message}</p>
         </div>
         : null}
         </div>
